@@ -16,15 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class QuestionIT {
 
     @Autowired
-    private QuestionRepository repository;
+    private QuestionService questionService;
 
 
     @Test
     @Transactional
     public void givenQuestionEntityRepository_whenSaveandRetreiveEntity_theOK() {
 
-        Question savedQuestion = repository.save(new Question());
-        Question foundQuestion = repository.findById(savedQuestion.getId()).get();
+        Question savedQuestion = questionService.save(new Question());
+        Question foundQuestion = questionService.getById(savedQuestion.getId());
 
         assertNotNull(foundQuestion);
         assertEquals(savedQuestion, foundQuestion);
