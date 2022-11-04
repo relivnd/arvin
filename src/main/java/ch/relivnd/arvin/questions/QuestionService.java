@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,8 +17,13 @@ public class QuestionService {
         return repository.save(question);
     }
 
-    public Question getById(long id) {
-        return repository.findById(id).get();
+    public Question getById(Long id) {
+        if (repository.findById(id).isPresent()) return repository.findById(id).get();
+        return null;
+    }
+
+    public List<Question> getAll() {
+        return repository.findAll().stream().toList();
     }
 
 
